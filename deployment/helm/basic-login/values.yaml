@@ -1,14 +1,14 @@
 namespace: app
 service:
-  name: basic-auth
+  name: basic-login
   port: 8080
   image:
-    path: basic-auth
-    tag: 1.0.0-SNAPSHOT
+    path: bharathpantala/basic-login
+    tag: latest
 
 ingress:
-  host: app.cloudrural.net
-  path: "/"
+  host: dev01.cloudrural.net
+  path: "/basic-login"
 
 #environments:
 
