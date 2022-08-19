@@ -1,10 +1,10 @@
 namespace: app
 service:
   name: basic-auth
-  port: 80
+  port: 8080
   image:
     path: basic-auth
-    tag: latest
+    tag: 1.0.0-SNAPSHOT
 
 ingress:
   host: app.cloudrural.net
