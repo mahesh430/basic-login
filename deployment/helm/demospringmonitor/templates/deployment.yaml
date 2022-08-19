@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    meta.helm.sh/release-name: {{ .Values.service.name }}
+    meta.helm.sh/release-namespace: {{  .Values.namespace  }}
+  labels:
+    app.kubernetes.io/instance: {{ .Values.service.name }}
+    app.kubernetes.io/name: {{ .Values.service.name }}
+    helm.sh/chart: {{ .Values.service.name }}-{{ .Values.service.image.tag }}
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Values.service.name }}
+      app.kubernetes.io/name: {{ .Values.service.name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: {{ .Values.service.name }}
+        app.kubernetes.io/name: {{ .Values.service.name }}
+    spec:
+      containers:
+        - image: {{ .Values.service.image.path }}:{{ .Values.service.image.tag }}
+          imagePullPolicy: Always
+          name: {{ .Values.service.name }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "2"
+              memory: "2G"
+            requests:
+              memory: "500M"
+              cpu: "0.5"
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: aws-registry
+      serviceAccount: {{ .Values.service.name }}
+      serviceAccountName: {{ .Values.service.name }}
