@@ -7,6 +7,7 @@ service:
     tag: latest
 
 ingress:
+  enabled: false
   host: dev01.cloudrural.net
   path: "/basic-login"
 
