@@ -1,5 +1,30 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            defaultContainer 'worker'
+            yaml """
+kind: Pod
+metadata:
+  name: worker
+spec:
+  containers:
+  - name: worker
+    image: bharathpantala/jenkins-agent:v1.0.0
+    imagePullPolicy: "IfNotPresent"
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - name: dockersock
+        mountPath: "/var/run/docker.sock"
+  restartPolicy: Never
+  volumes:
+      - name: dockersock
+        hostPath:
+          path: "/var/run/docker.sock"
+"""
+        }
+    }
     environment {
         AWS_ACCOUNT_ID="065740665475"
         AWS_DEFAULT_REGION="us-east-2" 
