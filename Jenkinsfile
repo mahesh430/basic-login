@@ -40,7 +40,7 @@ spec:
         // Building Docker images
         stage('Checkout SCM') {
             steps{
-               git credentialsId: 'github-key', url: 'git@github.com:cloudrural/basic-login.git'
+               git url: 'https://github.com/cloudrural/basic-login.git'
             }
         }
         // Building Docker images
