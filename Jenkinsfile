@@ -26,15 +26,15 @@ spec:
         }
     }
     environment {
-        AWS_ACCOUNT_ID=""=
-        AWS_DEFAULT_REGION="us-east-2" 
+        //AWS_ACCOUNT_ID=""=
+        //AWS_DEFAULT_REGION="us-east-2" 
         IMAGE_REPO_NAME="bharathpantala/basic-login"
         ARTIFACT_NAME="basic-login"
         IMAGE_TAG="1.0.0-SNAPSHOT"
-        REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        //REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
         AWS_CREDS_ID="aws-creds-ecr"
         DH_CREDS_ID="docker-hub-secret"
-        K8S_SECRET="k8s-secret"
+        //K8S_SECRET="k8s-secret"
     }
     stages {
         // Building Docker images
@@ -62,16 +62,8 @@ spec:
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.DH_CREDS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                     sh "docker login --username $USERNAME -p $PASSWORD docker.io"
-                    sh "docker push bharathpantala/demospringmonitor:${IMAGE_TAG}"
+                    sh "docker push ${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                     }
-                }
-            }
-        }
-        // Uploading Docker images into AWS ECR
-        stage('Pushing to Dockerhub') {
-            steps{  
-                script {
-                sh "docker push bharathpantala/demospringmonitor:${IMAGE_TAG}"
                 }
             }
         }
