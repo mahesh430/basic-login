@@ -1,8 +1,6 @@
 pipeline {
     agent {
-        
-        
-        kubernetes {
+               kubernetes {
             label 'my-agent'
             yaml """
 apiVersion: v1
@@ -31,6 +29,7 @@ spec:
       value: "jenkins-server:50000"
     """
         }
+    }
       
     environment {
         //AWS_ACCOUNT_ID=""=
@@ -110,4 +109,4 @@ spec:
 }
 */
 }
-}
+
