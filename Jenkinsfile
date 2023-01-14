@@ -1,33 +1,28 @@
 pipeline {
     agent {
                kubernetes {
-            label 'my-agent'
+             defaultContainer 'worker'
             yaml """
-apiVersion: v1
 kind: Pod
 metadata:
-  labels:
-    app: my-agent
+  name: worker
 spec:
   containers:
-  - name: my-agent
+  - name: worker
     image: bharathpantala/jenkins-agent:v1.0.0
-    resources:
-      limits:
-        cpu: "1000m"
-        memory: "1Gi"
-    env:
-    - name: "JENKINS_AGENT_NAME"
-      value: "my-agent"
-    - name: "JENKINS_AGENT_WORKDIR"
-      value: "/home/jenkins"
-    - name: "JENKINS_URL"
-      value: "http://localhost:8080"
-    - name: "JENKINS_SECRET"
-      value: "my-secret"
-    - name: "JENKINS_TUNNEL"
-      value: "localhost:50000"
-    """
+    imagePullPolicy: "IfNotPresent"
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - name: dockersock
+        mountPath: "/var/run/docker.sock"
+  restartPolicy: Never
+  volumes:
+      - name: dockersock
+        hostPath:
+          path: "/var/run/docker.sock"
+"""
         }
     }
       
