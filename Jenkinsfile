@@ -22,11 +22,11 @@ spec:
     - name: "JENKINS_AGENT_WORKDIR"
       value: "/home/jenkins"
     - name: "JENKINS_URL"
-      value: "http://jenkins-server:8080"
+      value: "http://localhost:8080"
     - name: "JENKINS_SECRET"
       value: "my-secret"
     - name: "JENKINS_TUNNEL"
-      value: "jenkins-server:50000"
+      value: "localhost:50000"
     """
         }
     }
