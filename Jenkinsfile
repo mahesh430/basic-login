@@ -54,6 +54,7 @@ spec:
         stage('Docker Image') {
             steps{
                 script {
+                    sh "sudo usermod -a -G docker jenkins"
                 sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
                 }
             }
