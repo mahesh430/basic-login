@@ -68,7 +68,7 @@ spec:
                 }
             }
         }
-    }
+    
 
         stage('Logging into AWS ECR') {
             steps {
@@ -104,3 +104,4 @@ spec:
 
 
 
+}
