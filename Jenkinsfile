@@ -27,8 +27,8 @@ spec:
     }
       
     environment {
-        //AWS_ACCOUNT_ID=""=
-        //AWS_DEFAULT_REGION="us-east-2" 
+        AWS_ACCOUNT_ID="566875954720"
+        AWS_DEFAULT_REGION="us-east-2" 
         IMAGE_REPO_NAME="bharathpantala/basic-login"
         ARTIFACT_NAME="basic-login"
         IMAGE_TAG="1.0.0-SNAPSHOT"
@@ -41,7 +41,7 @@ spec:
         // Building Docker images
         stage('Checkout SCM') {
             steps{
-               git url: 'https://github.com/cloudrural/basic-login.git'
+               git url: 'https://github.com/mahesh430/basic-login.git'
             }
         }
         // Building Docker images
@@ -69,13 +69,13 @@ spec:
             }
         }
     }
-/*
+
         stage('Logging into AWS ECR') {
             steps {
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.AWS_CREDS_ID, usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin 065740665475.dkr.ecr.us-east-2.amazonaws.com"
-                    }
+                    sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin 566875954720.dkr.ecr.us-east-2.amazonaws.com"
+                   }
                 }
             }
         }   
@@ -102,6 +102,6 @@ spec:
         }
     }
 }
-*/
+
 }
 
