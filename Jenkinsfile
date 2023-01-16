@@ -51,20 +51,14 @@ spec:
             }
         }
         // Building Docker images
-        stage('Docker Image') {
-            steps{
-                script {
-                    sh "usermod -a -G docker jenkins"
-                sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
-                }
-            }
-        }
-        stage('Logging into Docker Hub') {
+    
+        stage('Docker build and Logging') {
             steps {
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.DH_CREDS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                    sh "docker login --username $USERNAME -p $PASSWORD docker.io"
-                    sh "docker push ${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                     sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+                    // sh "docker login --username $USERNAME -p $PASSWORD docker.io"
+                     //sh "docker push ${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                     }
                 }
             }
