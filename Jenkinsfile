@@ -57,6 +57,7 @@ spec:
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.DH_CREDS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                      sh "docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} ."
+                        sh "docker images"
                     // sh "docker login --username $USERNAME -p $PASSWORD docker.io"
                      //sh "docker push ${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                     }
