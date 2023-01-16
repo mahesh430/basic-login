@@ -1,5 +1,7 @@
 FROM openjdk:11.0.4-jre-slim
 
+USER root
+
 ENV APP_HOME /opt/app
 
 COPY target/*.jar ${APP_HOME}/app.jar
