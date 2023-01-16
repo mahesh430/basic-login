@@ -33,8 +33,8 @@ spec:
         ARTIFACT_NAME="basic-login"
         IMAGE_TAG="1.0.0-SNAPSHOT"
         //REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        AWS_CREDS_ID="aws-creds-ecr"
-        DH_CREDS_ID="docker-hub-secret"
+        AWS_CREDS_ID="AWS_CREDS_ID"
+        DH_CREDS_ID="DH_CREDS_ID"
         //K8S_SECRET="k8s-secret"
     }
     stages {
